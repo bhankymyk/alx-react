@@ -10,11 +10,12 @@ function App() {
         <h1>School dashboard</h1>
       </header>
       <body className="App-body">
-    <p>Login to access the full dashboard fg</p>
+    <p>Login to access the full dashboard</p>
       <label>Email</label>
       <input name="email" type="email" id="email"></input>
-      <label>Email</label>
+      <label>Password</label>
       <input name="password" type="password" id="password"></input>
+      <button>OK</button>
       </body>
       <footer className="App-footer">
       <p>Copyright {getFullYear()} - {getFooterCopy(true)}</p>
