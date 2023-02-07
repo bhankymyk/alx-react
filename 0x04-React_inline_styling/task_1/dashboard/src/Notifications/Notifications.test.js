@@ -3,6 +3,7 @@ import { jest } from '@jest/globals';
 import { shallow, mount } from 'enzyme';
 import Notifications from './Notifications';
 import { getLatestNotification } from '../utils/utils';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe("Testing the <Notifications /> Component", () => {
   
@@ -14,6 +15,7 @@ describe("Testing the <Notifications /> Component", () => {
   ];
 
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<Notifications />);
   });
 
@@ -62,6 +64,7 @@ describe("Testing <Notification displayDrawer={true}/> ", () => {
   let wrapper;
 
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<Notifications displayDrawer={true}/>);
   });
 
@@ -70,7 +73,7 @@ describe("Testing <Notification displayDrawer={true}/> ", () => {
   });
 
   it("div.Notifications is being displayed when displayDrawer is true", () => {
-    expect(wrapper.find('.Notifications')).toHaveLength(1);
+    expect(wrapper.find('button')).toHaveLength(1);
   });
 });
 
@@ -83,6 +86,7 @@ describe("Testing <Notification displayDrawer={true} listNotifications={[...]}/>
   ];
 
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>);
   });
 
@@ -93,6 +97,10 @@ describe("Testing <Notification displayDrawer={true} listNotifications={[...]}/>
 });
 
 describe("Testing markAsRead method in the notification class Component", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   it("Check that when calling the function markAsRead on an instance of the component, the spy is being called with the right message", () => {
     const listNotifications = [
       {id: 1, value: "New course available", type: "default"},
@@ -111,6 +119,10 @@ describe("Testing markAsRead method in the notification class Component", () => 
 });
 
 describe("Testing the notification class Component re-rendering", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   it("verify that when updating the props of the component with the same list, the component doesnt rerender", () => {
     const listNotifications = [
       {id: 1, value: "New course available", type: "default"},

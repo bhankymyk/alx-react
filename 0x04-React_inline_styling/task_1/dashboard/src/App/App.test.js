@@ -1,11 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { jest } from '@jest/globals';
 import App from './App';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('Test App.js', () => {
   let wrapper;
 
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<App />);
   });
 
@@ -38,6 +41,7 @@ describe("Testing <App isLoggedIn={true} />", () => {
   let wrapper;
 
   beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
     wrapper = shallow(<App isLoggedIn={true}/>);
   });
 
@@ -45,12 +49,15 @@ describe("Testing <App isLoggedIn={true} />", () => {
     expect(wrapper.find('Login')).toHaveLength(0);
   });
 
-  it(" the CourseList component is included", () => {
+  it("the CourseList component is included", () => {
     expect(wrapper.find('CourseList').exists());
   });
 });
 
 describe("Testing <App logOut={function} />", () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
 
   it("verify that when the keys control and h are pressed the logOut function, passed as a prop, is called and the alert function is called with the string Logging you out", () => {
     const wrapper = mount(<App logOut={()=>{console.log("ctrl and h are pressed")}}/>);
